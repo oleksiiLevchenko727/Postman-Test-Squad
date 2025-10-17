@@ -1,0 +1,1324 @@
+{
+	"info": {
+		"_postman_id": "d41650f7-e660-4d29-9e1b-ce4af42dcb20",
+		"name": "store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34194647"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Positive tests",
+					"item": [
+						{
+							"name": "Create product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 201;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"\r",
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"     pm.expect(pm.response.code).to.eql(expectedStatus); \r",
+											"     });\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"pm.test(\"Name is present\", function () {\r",
+											"    pm.expect(response.name).to.eql(requestBody.name);\r",
+											"});\r",
+											"pm.test(\"Price is present\", function () {\r",
+											"    pm.expect(response.price).to.eql(requestBody.price);\r",
+											"});\r",
+											"pm.test(\"Description is present\", function () {\r",
+											"    pm.expect(response.description).to.eql(requestBody.description);\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"orange\",\r\n    \"price\": 8,\r\n    \"sku\": 12343436,\r\n    \"description\": \"The description\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List products",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 200;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"\r",
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"     pm.expect(pm.response.code).to.eql(expectedStatus); \r",
+											"     });\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"pm.test(\"id is present\", function () {\r",
+											"    pm.expect(response.id).to.eql(requestBody.id);\r",
+											"});\r",
+											"pm.test(\"Name is present\", function () {\r",
+											"    pm.expect(response.name).to.eql(requestBody.name);\r",
+											"});\r",
+											"pm.test(\"sku is present\", function () {\r",
+											"    pm.expect(response.sku).to.eql(requestBody.sku);\r",
+											"});\r",
+											"pm.test(\"description is present\", function () {\r",
+											"    pm.expect(response.description).to.eql(requestBody.description);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test pagination products",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 200;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"\r",
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"     pm.expect(pm.response.code).to.eql(expectedStatus); \r",
+											"     });\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"pm.test(\"id is exists\", function () {\r",
+											"    pm.expect(response.id).to.eql(requestBody.id);\r",
+											"});\r",
+											"pm.test(\"Name is present\", function () {\r",
+											"    pm.expect(response.name).to.eql(requestBody.name);\r",
+											"});\r",
+											"pm.test(\"sku is present\", function () {\r",
+											"    pm.expect(response.sku).to.eql(requestBody.sku);\r",
+											"});\r",
+											"pm.test(\"description is present\", function () {\r",
+											"    pm.expect(response.description).to.eql(requestBody.description);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products?page=1&pageSize=4",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test sorting products",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 200;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"\r",
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"pm.test(\"id is present\", function () {\r",
+											"    pm.expect(response.id).to.eql(requestBody.id);\r",
+											"});\r",
+											"pm.test(\"Name is present\", function () {\r",
+											"    pm.expect(response.name).to.eql(requestBody.name);\r",
+											"});\r",
+											"pm.test(\"sku is present\", function () {\r",
+											"    pm.expect(response.sku).to.eql(requestBody.sku);\r",
+											"});\r",
+											"pm.test(\"description is present\", function () {\r",
+											"    pm.expect(response.description).to.eql(requestBody.description);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/products?sortOrder=ASC&sortKey=name",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "sortOrder",
+											"value": "ASC"
+										},
+										{
+											"key": "sortKey",
+											"value": "name"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Schema validation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 200;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"\r",
+											"const response = pm.response.json();\r",
+											"\r",
+											"const schema = {\r",
+											"    \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+											"  \"type\": \"array\",\r",
+											"  \"items\": [\r",
+											"    {\r",
+											"      \"type\": \"object\",\r",
+											"      \"properties\": {\r",
+											"        \"id\": {\r",
+											"          \"type\": \"integer\"\r",
+											"        },\r",
+											"        \"name\": {\r",
+											"          \"type\": \"string\"\r",
+											"        },\r",
+											"        \"price\": {\r",
+											"          \"type\": \"integer\"\r",
+											"        },\r",
+											"        \"sku\": {\r",
+											"          \"type\": \"integer\"\r",
+											"        },\r",
+											"        \"description\": {\r",
+											"          \"type\": \"string\"\r",
+											"        }\r",
+											"      },\r",
+											"      \"required\": [\r",
+											"        \"id\",\r",
+											"        \"name\",\r",
+											"        \"price\",\r",
+											"        \"sku\",\r",
+											"        \"description\"\r",
+											"      ]\r",
+											"    },\r",
+											"    {\r",
+											"      \"type\": \"object\",\r",
+											"      \"properties\": {\r",
+											"        \"id\": {\r",
+											"          \"type\": \"integer\"\r",
+											"        },\r",
+											"        \"name\": {\r",
+											"          \"type\": \"string\"\r",
+											"        },\r",
+											"        \"price\": {\r",
+											"          \"type\": \"integer\"\r",
+											"        },\r",
+											"        \"sku\": {\r",
+											"          \"type\": \"integer\"\r",
+											"        },\r",
+											"        \"description\": {\r",
+											"          \"type\": \"string\"\r",
+											"        }\r",
+											"      },\r",
+											"      \"required\": [\r",
+											"        \"id\",\r",
+											"        \"name\",\r",
+											"        \"price\",\r",
+											"        \"sku\",\r",
+											"        \"description\"\r",
+											"      ]\r",
+											"    },\r",
+											"    {\r",
+											"      \"type\": \"object\",\r",
+											"      \"properties\": {\r",
+											"        \"id\": {\r",
+											"          \"type\": \"integer\"\r",
+											"        },\r",
+											"        \"name\": {\r",
+											"          \"type\": \"string\"\r",
+											"        },\r",
+											"        \"price\": {\r",
+											"          \"type\": \"integer\"\r",
+											"        },\r",
+											"        \"sku\": {\r",
+											"          \"type\": \"integer\"\r",
+											"        },\r",
+											"        \"description\": {\r",
+											"          \"type\": \"string\"\r",
+											"        }\r",
+											"      },\r",
+											"      \"required\": [\r",
+											"        \"id\",\r",
+											"        \"name\",\r",
+											"        \"price\",\r",
+											"        \"sku\",\r",
+											"        \"description\"\r",
+											"      ]\r",
+											"    }\r",
+											"  ]\r",
+											"}\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"pm.test(\"Response matches schema\", function () {\r",
+											"  pm.expect(tv4.validate(response, schema)).to.be.true;\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get product by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 200;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"const id = pm.variables.get(\"id\");\r",
+											"const expectedName = pm.variables.get(\"expectedName\");\r",
+											"const expectedPrice = pm.variables.get(\"expectedPrice\");\r",
+											"const expectedSku = pm.variables.get(\"expectedSku\");\r",
+											"const expectedDescription = pm.variables.get(\"expectedDescription\");\r",
+											"\r",
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"     pm.expect(pm.response.code).to.eql(expectedStatus); \r",
+											"     });\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"pm.test(\"Expected id\", function () {\r",
+											"    pm.expect(response.id).to.eql(Number(id));\r",
+											"});\r",
+											"pm.test(\"Expected name\", function () {\r",
+											"   pm.expect(response.name).to.eql(expectedName);\r",
+											"});\r",
+											"pm.test(\"Expected price\", function () {\r",
+											"    pm.expect(response.price).to.eql(Number(expectedPrice));\r",
+											"});\r",
+											"pm.test(\"Expected Sku\", function () {\r",
+											"    pm.expect(response.sku).to.eql(Number(expectedSku));\r",
+											"});\r",
+											"pm.test(\"Expected description\", function () {\r",
+											"    pm.expect(response.description).to.eql(expectedDescription);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/4",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 200;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"const id = pm.variables.get(\"id\");\r",
+											"const expectedNewName = pm.variables.get(\"expectedNewName\");\r",
+											"const expectedNewPrice = pm.variables.get(\"expectedNewPrice\");\r",
+											"const expectedNewSku = pm.variables.get(\"expectedNewSku\");\r",
+											"const expectedNewDescription = pm.variables.get(\"expectedNewDescription\");\r",
+											"\r",
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(expectedStatus); \r",
+											"});\r",
+											"pm.test(\"Content-Type is exists\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"pm.test(\"Expected id is 4\", function () {\r",
+											"    pm.expect(response.id).to.eql(Number(id));\r",
+											"});\r",
+											"pm.test(\"Expected new name is 'banana'\", function () {\r",
+											"    pm.expect(response.name).to.eql(expectedNewName);\r",
+											"});\r",
+											"pm.test(\"Expected new price is 155\", function () {\r",
+											"    pm.expect(response.price).to.eql(Number(expectedNewPrice));\r",
+											"});\r",
+											"pm.test(\"Expected new Sku is 123321123\", function () {\r",
+											"    pm.expect(response.sku).to.eql(Number(expectedNewSku));\r",
+											"});\r",
+											"pm.test(\"Expected new description is 'changed description'\", function () {\r",
+											"    pm.expect(response.description).to.eql(expectedNewDescription);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"banana\",\r\n    \"price\": 155,\r\n    \"sku\": 123321123,\r\n    \"description\": \"changed description\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove product by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 200;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"\r",
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(expectedStatus); \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/4",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Check deleted product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 404;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"\r",
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"pm.test(\"Status code is 404, product doesn't exist\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(expectedStatus); \r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/4",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative tests",
+					"item": [
+						{
+							"name": "Create product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 400;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"let responseBody;\r",
+											"\r",
+											"try {\r",
+											"    responseBody = pm.response.json();\r",
+											"} catch (e) {\r",
+											"    responseBody = pm.response.text(); \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 400 (Bad Request)\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has Content-Type header\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response body exists\", function () {\r",
+											"    pm.expect(responseBody).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "121",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List products",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 404;\r",
+											"\r",
+											"let responseBody;\r",
+											"try {\r",
+											"    responseBody = pm.response.json();\r",
+											"} catch (e) {\r",
+											"    console.warn('Could not parse JSON');\r",
+											"    responseBody = pm.response.text();\r",
+											"}\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 404 (Bad Request)\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has Content-Type header\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response body exists\", function () {\r",
+											"    pm.expect(responseBody).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1213",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "javascript"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test sorting products",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 400;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"let responseBody;\r",
+											"\r",
+											"try {\r",
+											"    responseBody = pm.response.json();\r",
+											"} catch (e) {\r",
+											"    responseBody = pm.response.text(); \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 404 (Bad Request)\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has Content-Type header\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response body exists\", function () {\r",
+											"    pm.expect(responseBody).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/products?sortOrder=ASC&sortKey=transport",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "sortOrder",
+											"value": "ASC"
+										},
+										{
+											"key": "sortKey",
+											"value": "transport"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get product by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 404;\r",
+											"\r",
+											"let responseBody;\r",
+											"try {\r",
+											"    responseBody = pm.response.json();\r",
+											"} catch (e) {\r",
+											"    console.warn('Could not parse JSON');\r",
+											"    responseBody = pm.response.text();\r",
+											"}\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 404 (Bad Request)\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has Content-Type header\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response body exists\", function () {\r",
+											"    pm.expect(responseBody).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/something",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"something"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 404;\r",
+											"\r",
+											"let responseBody;\r",
+											"try {\r",
+											"    responseBody = pm.response.json();\r",
+											"} catch (e) {\r",
+											"    console.warn('Could not parse JSON');\r",
+											"    responseBody = pm.response.text();\r",
+											"}\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 404 (Bad Request)\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has Content-Type header\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response body exists\", function () {\r",
+											"    pm.expect(responseBody).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"price\": 155,\r\n    \"sku\": 123321123,\r\n    \"description\": \"changed description\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products/4",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove product by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedStatus = 200;\r",
+											"const requestBody = pm.request.body.raw ? JSON.parse(pm.request.body.raw) : {};\r",
+											"let response;\r",
+											"try {\r",
+											"    response = pm.response.json();\r",
+											"} catch (e) {\r",
+											"    response = null; \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 200, but it is wrong\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(expectedStatus);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has Content-Type header\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response body exists\", function () {\r",
+											"    pm.expect(responseBody).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/@@@!!!",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"@@@!!!"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"order5\",\r\n    \"sku\": 123425445656765\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get order by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/orders/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"order5\",\r\n    \"sku\": 123425445656765\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove order by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/orders/4",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Dream\",\r\n    \"lastName\": \"Real\",\r\n    \"email\": \"dream.real@gmail.com\",\r\n    \"dateOfBirth\": \"2001-10-99\",\r\n    \"emailVerified\": true,\r\n    \"signUpDate\": \"2019-08-24\",\r\n    \"status\": \"active\",\r\n    \"level\": \"lord\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Ilon\",\r\n    \"lastName\": \"Mask\",\r\n    \"email\": \"ilon.mask@gmail.com\",\r\n    \"dateOfBirth\": \"2001-10-99\",\r\n    \"emailVerified\": true,\r\n    \"signUpDate\": \"2019-08-24\",\r\n    \"status\": \"active\",\r\n    \"level\": \"lord\",\r\n    \"id\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "expectedName",
+			"value": "apple"
+		},
+		{
+			"key": "expectedPrice",
+			"value": "21"
+		},
+		{
+			"key": "expectedDescription",
+			"value": "The description is..."
+		},
+		{
+			"key": "expectedSku",
+			"value": "123943436"
+		},
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "expectedNewName",
+			"value": "banana"
+		},
+		{
+			"key": "expectedNewPrice",
+			"value": "155"
+		},
+		{
+			"key": "expectedNewDescription",
+			"value": "changed description"
+		},
+		{
+			"key": "expectedNewSku",
+			"value": "123321123"
+		}
+	]
+}

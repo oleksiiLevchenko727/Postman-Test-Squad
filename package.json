@@ -1,14 +1,30 @@
 {
   "name": "mock-rest-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "<a href=\"https://drive.google.com/file/d/1LQ1uG7Tt70Jubuk5loS4dMSk-1AJ5jzz/view?usp=sharing\" /> Intro </a>",
+  "type": "module",
   "scripts": {
     "tern-on-api": "cp mockApi/db_back_up.yaml mockApi/db_stage.yaml && npx yaml-server --hotReload=off --autoStart=off --port 3000 --database ./mockApi/db_stage.yaml"
   },
-  "keywords": ["api","mock","yaml-server","rest"],
+  "keywords": [
+    "api",
+    "mock",
+    "yaml-server",
+    "rest"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^5.1.0",
     "yaml-server": "^1.10.0"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WannaBeDream/Postman-newman-ghActions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WannaBeDream/Postman-newman-ghActions/issues"
+  },
+  "homepage": "https://github.com/WannaBeDream/Postman-newman-ghActions#readme"
 }
